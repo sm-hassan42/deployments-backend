@@ -18,6 +18,10 @@ app.post('/login', (req, res) => {
   res.json({ success: isValid })
 })
 
+app.get("/", (req, res) => {
+  res.send("Backend is running 🚀");
+});
+
 app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`)
 })
