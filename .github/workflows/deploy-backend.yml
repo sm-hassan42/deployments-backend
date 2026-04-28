@@ -17,9 +17,21 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           script: |
             set -e
+
+            echo "📦 Moving to project directory..."
             cd /home/ec2-user/deployments-backend
+
+            echo "🔄 Pulling latest code..."
             git fetch origin
             git reset --hard origin/main
-            npm ci --omit=dev
-            pm2 restart backend
+
+            echo "📦 Installing dependencies..."
+            npm install --omit=dev
+
+            echo "🚀 Starting or restarting PM2 app..."
+            pm2 describe backend > /dev/null 2>&1 \
+              && pm2 restart backend \
+              || pm2 start server.js --name backend
+
+            echo "💾 Saving PM2 process..."
             pm2 save
