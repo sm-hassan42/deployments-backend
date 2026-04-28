@@ -17,7 +17,7 @@ app.options("*", cors());
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body
-  const isValid = username === 'hassan shah' && password === 'hassan shah'
+  const isValid = username === 'hassan ali' && password === 'hassan ali'
 
   res.json({ success: isValid })
 })
