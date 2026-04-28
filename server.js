@@ -5,11 +5,14 @@ const app = express()
 const PORT = 3001
 
 
-
 app.use(cors({
-  origin: "*"
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
 }));
-app.use(express.json())
+
+app.options("*", cors());
+
 
 app.post('/login', (req, res) => {
   const { username, password } = req.body
